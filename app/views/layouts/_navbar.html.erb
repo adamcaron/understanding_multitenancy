@@ -6,19 +6,28 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="/">Storedom</a>
+    <% if current_store %>
+      <p>
+        <%= link_to current_store.name, store_items_path(store: current_store.url), class: "navbar-brand" %>
+      </p>
+    <% else %>
+      <a class="navbar-brand" href="/">Storedom</a>
+    <% end %>
   </div>
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
-      <li>
-        <a href="/">Items</a>
-      </li>
-      <li>
-        <a href="/users">Users</a>
-      </li>
-      <li>
-        <a href="/orders">Orders</a>
-      </li>
+      <% if current_store %>
+        <li>
+          <%= link_to "Items", store_items_path(store: current_store.url) %>
+        </li>
+        <!-- <li>
+          <a href="/users">Users</a>
+        </li> -->
+        <li>
+          <!-- <a href="/orders">Orders</a> -->
+          <%= link_to "Orders", store_orders_path(store: current_store.url) %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </nav>
